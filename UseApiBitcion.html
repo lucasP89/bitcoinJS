@@ -1,0 +1,60 @@
+<!doctype html>
+<html >
+<head>
+  <meta charset="utf-8">
+  <title>bitCoin</title>
+
+  
+</head>
+<body style="width : 100%">
+<div style="width: 50%;
+text-align: center;
+margin: 0 auto;">
+<img src="bitcoin.png"/>
+<h1>BTC price :</h1>
+
+<ul id="liste"  >
+
+</ul>
+</div>
+<script>
+
+function reqListener ()
+{
+	var json = this.response;
+	
+	var liste = document.getElementById('liste');
+	var item1 = document.createElement('li');
+	var item2 = document.createElement('li');
+	var item3 = document.createElement('li');
+	var item4 = document.createElement('li');
+	
+	item1.innerHTML = json.bpi.USD['code']+' : '+json.bpi.USD['rate']+' '+json.bpi.USD['symbol'];
+	item2.innerHTML = json.bpi.GBP['code']+' : '+json.bpi.GBP['rate']+' '+json.bpi.GBP['symbol'];
+	item3.innerHTML = json.bpi.EUR['code']+' : '+json.bpi.EUR['rate']+' '+json.bpi.EUR['symbol'];
+	item4.innerHTML = json.time['updated'];
+	
+	
+	liste.appendChild(item1);	
+	liste.appendChild(item2);
+	liste.appendChild(item3);
+	liste.appendChild(item4);		
+	
+	
+}
+			 
+	var oReq = new XMLHttpRequest();
+	oReq.onload = reqListener;
+	oReq.open("GET","https://api.coindesk.com/v1/bpi/currentprice.json", true)
+	oReq.responseType = "json";
+	oReq.send();
+			
+		
+		
+			
+	
+</script>
+	
+	
+</body>
+</html>
